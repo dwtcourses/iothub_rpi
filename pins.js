@@ -1,5 +1,5 @@
 module.exports = {
-    temperature : 26,
-    greenLed    : 18,
-    redLed      : 21,
+    temperature : "GPIO26",
+    greenLed    : "GPIO18",
+    redLed      : "GPIO21",
 }
