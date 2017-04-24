@@ -1,5 +1,5 @@
 module.exports = {
-    temperature = "",
-    greenLed    = "",
-    redLed      = "",
+    temperature = "26",
+    greenLed    = "18",
+    redLed      = "21",
 }
