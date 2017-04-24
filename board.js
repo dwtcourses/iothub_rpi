@@ -5,7 +5,7 @@ module.exports = function(eventEmitter) {
     var board = new five.Board({
         io: new Raspi()
     });
-    var pins    = require("pins.js")
+    var pins    = require("./pins.js")
 
     board.on("ready", function() {
         // This requires OneWire support using the ConfigurableFirmata

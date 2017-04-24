@@ -11,7 +11,7 @@ var Protocol    = require('azure-iot-device-mqtt').Mqtt,
     client      = null,
     events      = require('events'),
     emitter     = null,
-    board       = require('board.js'),
+    board       = require('./board.js'),
     alertTemp   = 70;
     
     
