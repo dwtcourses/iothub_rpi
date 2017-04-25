@@ -41,7 +41,7 @@ function main() {
     client.open(connect);
 }
 
-
+// The function to run when the IoT Hub client connects
 function connect(err) {
     if (err) {
         console.error('Could not connect: ' + err.message);
@@ -63,7 +63,7 @@ function connect(err) {
     client.onDeviceMethod('disableAlert', disableAlert);
 }
 
-
+// The function to run when the temperature changes.
 function temperatureChanged(obj, greenLed, redLed) {
     var message = new Message(JSON.stringify({
         deviceId:       creds.DeviceId, 
