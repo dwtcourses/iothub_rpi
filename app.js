@@ -73,7 +73,11 @@ function temperatureChanged(obj, greenLed, redLed) {
 
     // Send the message
     client.sendEvent(message, function() {
-         greenLed.blink(500);
+         greenLed.on();
+         setTimeout(function() {
+             greenLed.off();
+             greenLed.stop();
+         })
     });
 
     // Edge processing to see if the temperature is higher than we want
