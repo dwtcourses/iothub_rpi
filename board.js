@@ -33,7 +33,7 @@ module.exports = function(eventEmitter) {
         var red     = new five.Led(pins.redLed);
 
         // Check the sensor every second.
-        setTimeout(function () {
+        setInterval(function () {
             fetchTemperature(function(obj) {
                 eventEmitter.emit("temperature:change", obj ,green, red);
             });
