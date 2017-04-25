@@ -47,9 +47,15 @@ module.exports = function(eventEmitter) {
         // Listen to any event named disableAlert
         // If we get an event, disable the red LED
         eventEmitter.on('disableAlert', function() {
-            red.stop();
             red.off();
-        })
+        });
+
+        this.on("exit", function() {
+            green.off();
+            red.off();
+        });
+
+
 
     });
 };

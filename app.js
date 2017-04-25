@@ -76,7 +76,6 @@ function temperatureChanged(obj, greenLed, redLed) {
          greenLed.on();
          setTimeout(function() {
              greenLed.off();
-             greenLed.stop();
          })
     });
 
