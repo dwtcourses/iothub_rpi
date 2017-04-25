@@ -9,17 +9,18 @@ module.exports = function(eventEmitter) {
 
     board.on("ready", function() {
         // This requires OneWire support using the ConfigurableFirmata
-        var thermometer = new five.Thermometer({
-            controller: "DS18B20",
-            pin: pins.temperature
+        var multi = new five.Multi({
+            controller: "DHT11_I2C_NANO_BACKPACK"
+        });
+
+        multi.on("change", function() {
+            console.log("Thermometer");
+            console.log("  fahrenheit        : ", this.thermometer.fahrenheit);
+            eventEmitter.emit("temperature:change", this, green, red);
         });
 
         var green   = new five.Led(pins.greenLed);
         var red     = new five.Led(pins.redLed);
-
-        thermometer.on("change", function() {
-            eventEmitter.emit("temperature:change", this, green, red);
-        });
 
         // Listen to any event named disableAlert
         // If we get an event, disable the red LED
