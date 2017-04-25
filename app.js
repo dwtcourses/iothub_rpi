@@ -76,7 +76,7 @@ function temperatureChanged(obj, greenLed, redLed) {
          greenLed.on();
          setTimeout(function() {
              greenLed.off();
-         })
+         },500);
     });
 
     // Edge processing to see if the temperature is higher than we want
