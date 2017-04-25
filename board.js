@@ -1,5 +1,26 @@
 var five = require("johnny-five");
 var Raspi = require("raspi-io");
+var sensor = require('ds18x20');
+
+
+function fetchTemperature(callback) {
+    sensor.isDriverLoaded(function (err, isLoaded) {
+        if (isLoaded) {
+            sensor.list(function (err, listOfDeviceIds) {
+                sensor.get(listOfDeviceIds[0], function (err, tempObj) {
+                    callback({temperature: {
+                        celsius:    tempObj,
+                        fahrenheit: tempObj * 9/5 + 32
+
+                    }});
+                });
+            });
+        }
+    });
+
+}
+
+
 
 module.exports = function(eventEmitter) {
     var board = new five.Board({
@@ -8,19 +29,20 @@ module.exports = function(eventEmitter) {
     var pins    = require("./pins.js")
 
     board.on("ready", function() {
-        // This requires OneWire support using the ConfigurableFirmata
-        var multi = new five.Multi({
-            controller: "DHT11_I2C_NANO_BACKPACK"
-        });
-
-        multi.on("change", function() {
-            console.log("Thermometer");
-            console.log("  fahrenheit        : ", this.thermometer.fahrenheit);
-            eventEmitter.emit("temperature:change", this, green, red);
-        });
-
         var green   = new five.Led(pins.greenLed);
         var red     = new five.Led(pins.redLed);
+        var prev    = 0;
+
+        // Check the sensor every second.
+        setTimeout(function () {
+            fetchTemperature(function(obj) {
+                if (prev === obj.celsius) {
+                    return;
+                }
+                prev = obj.celsius;
+                eventEmitter.emit("temperature:change", obj ,green, red);
+            });
+        }, 1000); 
 
         // Listen to any event named disableAlert
         // If we get an event, disable the red LED

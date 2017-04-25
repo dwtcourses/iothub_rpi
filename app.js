@@ -67,7 +67,7 @@ function connect(err) {
 function temperatureChanged(obj, greenLed, redLed) {
     var message = JSON.stringify({
         deviceId:       creds.DeviceId, 
-        temperature:    obj.thermometer.fahrenheit,
+        temperature:    obj.fahrenheit,
         timestamp:      new Date(),
     });
 
