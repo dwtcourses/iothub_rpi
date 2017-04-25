@@ -8,11 +8,11 @@ function fetchTemperature(callback) {
         if (isLoaded) {
             sensor.list(function (err, listOfDeviceIds) {
                 sensor.get(listOfDeviceIds[0], function (err, tempObj) {
-                    callback({temperature: {
+                    callback({
                         celsius:    tempObj,
                         fahrenheit: tempObj * 9/5 + 32
 
-                    }});
+                    });
                 });
             });
         }
