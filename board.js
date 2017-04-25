@@ -31,15 +31,10 @@ module.exports = function(eventEmitter) {
     board.on("ready", function() {
         var green   = new five.Led(pins.greenLed);
         var red     = new five.Led(pins.redLed);
-        var prev    = 0;
 
         // Check the sensor every second.
         setTimeout(function () {
             fetchTemperature(function(obj) {
-                if (prev === obj.celsius) {
-                    return;
-                }
-                prev = obj.celsius;
                 eventEmitter.emit("temperature:change", obj ,green, red);
             });
         }, 1000); 
