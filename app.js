@@ -6,7 +6,6 @@
 var Protocol    = require('azure-iot-device-mqtt').Mqtt,
     Client      = require('azure-iot-device').Client,
     Message     = require('azure-iot-device').Message,
-    querystring = require('querystring'),
     creds       = require('./creds.js'),
     client      = null,
     events      = require('events'),
@@ -54,9 +53,7 @@ function connect(err) {
     });
 
     client.on('disconnect', function () {
-        clearInterval(sendInterval);
         client.removeAllListeners();
-        client.connect(connectCallback);
     });   
 
     // Listen for IoT Hub sending direct methods

@@ -13,7 +13,6 @@
     "azure-iot-device": "^1.1.3",
     "azure-iot-device-mqtt": "^1.1.3",
     "azure-iot-device-http": "1.1.7",
-    "querystring":"^0.2.0",
     "raspi-io": "*",
     "johnny-five": "*",
     "ds18x20": "*"
